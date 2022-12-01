@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :topics
   resources :books
   resources :high_scores
   get 'greetings/hello'
