@@ -18,10 +18,22 @@ RSpec.describe TopicsController, type: :controller do
   describe 'PATCH update' do
     context 'valid' do
       it 'update' do
-        patch :update, params: { topic: { title: "Growth", content:"2nd updated"}}
-        #except(assigns(:topic).title).to eq 'Growth'
-        except(flash[:notice]).to eq "Topic was successfully updated."
-        except(response).to have_http_status 302
+        patch :update, params:{topic: {title:'Growth'},id:topic.id}
+        expect(assigns(:topic).title).to eq 'Growth'
+        expect(flash[:notice]).to eq "Topic was successfully updated."
+        expect(response).to have_http_status 302
+      end
+    end
+  end
+
+  describe 'POST create' do
+    context 'valid' do
+      it 'create' do
+        expect{ post :create,params: { topic: {title: "Hulk2", content: "Green man"}}}.to change(Topic, :count).by(1)
+        expect(assigns(:topic).title).to eq 'Hulk2'
+        expect(flash[:notice]).to eq "Topic was successfully created."
+        expect(response).to have_http_status 302
+        expect(response).to redirect_to "/topics/#{assigns(:topic).id}"
       end
     end
   end
