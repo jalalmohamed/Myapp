@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <title>Page Title</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .city{
+            background-color: tomato;
+            padding: 20px;
+            color: black;
+            border: 2px solid black;
+            margin: 20px;
+        }
+        .note {
+            font-size:120px;
+            color:red;
+        }
+        #myheader{
+            background-color: lightblue;
+            color:mediumvioletred;
+            padding:20px;
+            text-align:center;
+        }
+    </style>
+    <h1>Heading</h1>
+</head>
+<body>
+    <h1 style="color:blue;"><br/>Header</h1>
+    <h6>Header 6</h6>
+    <!--Book Marking-->
+    <a href="#C4">Jump to Chapter 4</a>
+    <p title="About your Skills" style="color:red;">paragraph</p>
+    <a href="https://www.w3schools.com" target="_top">W3 Schools Link</a>
+    <br><br>
+    <p><a href="https://www.w3.org/">W3C</a></p>
+    <a href="https://www.w3.org/" target="_blank"><img src="Apple.jpg" alt="W3Schools.com" width="400px" height="250px"></a>
+    <br>
+    <a href="mailto:someone@example.com">Send email</a>
+    <br><br>
+    <button onclick="document.location='text.txt'">HTML Tutorial</button>
+    <br><br>
+    <a href="https://www.w3schools.com/html/default.asp" title="Go to W3Schools HTML section">Visit our HTML Tutorial</a>
+    <div class='city'>
+        <h2>London</h2>
+        <p>London is the capital of England</p>
+    </div>
+    <div class='city'>
+        <h2>Moscow</h2>
+        <p>Moscow is the capital of Russia</p>
+    </div>
+    <h1>My <span class="note">Important</span> Heading</h1>
+    <p>This is some <span class="note">important</span> text.</p>
+    <h2 class="city note">Delhi</h2>
+    <h2 class="city">Delhi</h2>
+    <!--<h2 class="note">Paris</h2>-->
+    <button onclick="myfunction()">Hide Elements</button>
+    <script>
+        function myfunction() {
+            var x = document.getElementsByClassName("city")
+            for (var i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+        }
+        function displaychange(){
+            document.getElementById("changetext").innerHTML="How are you?";
+        }
+    </script>
+    <h1 id="myheader">My Header</h1>
+    <!--<h1 id="myheader">My Header</h1>-->
+    <h2 id="C4">Chapter 4</h2>
+    <!--Changing text-->
+    <h2 id="changetext">Hello world</h2>
+    <button onclick="displaychange()">Change text</button>
+
+</body>
+    <p>paragraph</p>
+    <table>
+        <tr>
+            <th>Company</th>
+            <th>district</th>
+            <th>country</th>
+        </tr>
+        <tr>
+            <td>kantar</td>
+            <td>Hyderabad</td>
+            <td>India</td>
+            <td>World</td>
+        </tr>
+        <tr>
+            <td>Huge</td>
+            <td>Erode</td>
+            <td>India</td>
+        </tr>
+        <!--<tr>
+            <td>Huge</td>
+            <td>Erode</td>
+            <td>India</td>
+        </tr>-->
+        <tr>
+            <td>16</td>
+            <td>14</td>
+            <td>10</td>
+        </tr>
+    </table>
+</html>
