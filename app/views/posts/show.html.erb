@@ -1,10 +1,42 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @post %>
+<h1>Comments</h1>
 
+<% @post.comments.each do |comment| %>
+<%= render comment %>
+<% end %>
+<% if @post.tags.length>0 %>
+  <strong>Tags:</strong>
+  <% @post.tags.each do |tag| %>
+    <%= link_to tag, style:"text-decoration:none" do %>
+      <span class="tag"><%= tag.name.capitalize %></span>
+    <% end %>
+  <% end %>
+<%end %>
+<%= form_with(model: [@topic, @post]) do |form| %>
+  <%= fields_for(@posttag) do |p| %>
+    <%= p.label "All tags"%>
+    <%= collection_select(:tags,:id,@all_tags,:id,:name,{},{:multiple => true}) %>
+  <% end %>
+  <%#= render "add"%>
+  <div class="actions">
+    <%= form.submit "Add" %>
+  </div>
+<% end %>
+<% if params[:topic_id]%>
 <div>
+  <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post) %> |
   <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]) %> |
-  <%= link_to "Back to posts", [@topic, :posts] %>
-
-  <%= button_to "Destroy this post", [@topic, @post], method: :delete %>
+  <%= link_to "Back to posts", topic_posts_path(@topic) %>
+<br><br>
+  <%= button_to "Destroy this post", topic_posts_path([@topic, @post]), method: :delete %>
 </div>
+<% else %>
+  <%= link_to "New Comment", new_topic_post_comment_path(@post.topic,@post) %> |
+  <%= link_to "Back to topic", topic_path(@post.topic) %> |
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", topic_posts_path(@post.topic) %>
+
+  <%= button_to "Destroy this post", @post, method: :delete %>
+<% end %>

@@ -4,11 +4,19 @@
 
 <div id="posts">
   <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", [@topic, post] %>
-    </p>
+    <strong>Name:</strong>
+    <%= post.name %>&nbsp;
+      <% if params[:topic_id] %>
+        <%= link_to "Show this post", topic_post_path(@topic, post) %>
+      <% else %>
+        <%= link_to "Show this post", post %>
+      <% end %>
+    <br><br><br>
   <% end %>
 </div>
-<%= link_to "Back to topics", topics_path %> |
-<%= link_to "New post", new_topic_post_path %>
+<% if params[:topic_id] %>
+  <%= link_to "Back to topic", topic_path(@topic) %> |
+  <%= link_to "New post", new_topic_post_path %>
+<% else %>
+  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+<% end %>

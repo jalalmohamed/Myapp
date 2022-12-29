@@ -1,0 +1,8 @@
+<p style="color: green"><%= notice %></p>
+<%= render @inside %>
+
+<div>
+  <%= link_to "Edit this inside", edit_article_inside_path([@article, @inside]) %> |
+  <%= link_to "Back to inside", [@article, :insides] %>
+<br><br>
+  <%= button_to "Destroy this post", [@article, @inside], method: :delete %>

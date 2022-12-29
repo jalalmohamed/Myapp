@@ -1,0 +1,14 @@
+<p>
+  <strong>Name:</strong>
+  <%= @tag.name %>
+</p>
+
+<% @tag.posttags.each do |posttag| %>
+  <h2>Post:</h2>
+  <%= render 'posts/post', post: posttag.post %>
+  <%= link_to 'Read more', posttag.post %>
+  <hr/>
+
+<% end %>
+
+<%= link_to 'Destroy', tag_path(@tag), method: :delete, data: { confirm: 'Are you sure?' } %>

@@ -1,0 +1,16 @@
+
+  <%= form_with(model: [@topic,@post, comment]) do |form| %>
+    <div>
+      <%= form.label :commenter, style: "display: block" %>
+      <%= form.text_field :commenter %>
+    </div>
+
+    <div>
+      <%= form.label :Body, style: "display: block" %>
+      <%= form.text_area :body %>
+    </div>
+
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>

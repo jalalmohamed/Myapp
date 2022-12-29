@@ -1,0 +1,10 @@
+<h1>Edit Inside</h1>
+
+<%= render "form", inside: @inside %>
+
+<br>
+
+<div>
+  <%= link_to "Show this post", [@article, @inside] %> |
+  <%= link_to "Back to insides", article_insides_path(@article) %>
+</div>

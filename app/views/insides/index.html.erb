@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Insides</h1>
+
+
+<% @insides.each do |inside| %>
+  <%= render inside %>
+  <p>
+    <%= link_to "show this inside", [@article, inside] %>
+  </p>
+<% end %>
+<br>
+<%= link_to "Back to articles", articles_path %> |
+<%= link_to "New inside", new_article_inside_path %>

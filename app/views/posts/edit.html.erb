@@ -3,8 +3,13 @@
 <%= render "form", post: @post %>
 
 <br>
-
+<% if params[:topic_id] %>
 <div>
-  <%= link_to "Show this post", [@topic, @post] %> |
-  <%= link_to "Back to posts", topic_posts_path(@topic) %>
+  <%= link_to "Back", topic_post_path([@topic, @post]) %>
 </div>
+<% else %>
+  <div>
+    <%= link_to "Show this post", @post %> |
+    <%= link_to "Back to posts", posts_path %>
+  </div>
+<% end %>

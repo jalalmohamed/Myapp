@@ -1,0 +1,55 @@
+posts_path(@post)
+
+class CommentsController < ApplicationController
+  before_action :set_post
+  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_topic, except: %i[ create new ]
+  def index
+    @comments=@topic.comments
+  end
+
+  def show
+  end
+  def new
+    @comment = @post.topic.comments.build
+    comm=@post.topic.comments
+  end
+  def create
+      @comment = @post.comments.build(comment_params)
+      if @comment.save
+          redirect_to post_path(@post), notice: "comment was successfully created."
+      else
+        render :new, status: :unprocessable_entity
+      end
+  end
+  private
+  def set_topic
+   @topic= Topic.find(params[:topic_id])
+  end
+
+  def set_post
+    @post= Post.find(params[:post_id])
+  end
+  def set_comment
+    @comment=@post.comments.find(params[:id])
+  end
+  def comment_params
+    params.require(:comment).permit(:commenter, :body, :post_id)
+  end
+end
+<%= link_to "New Comment", new_topic_post_comment_path([@topic,@post]) %> |
+@topic.comments.build
+topic_post_path(@topic,@post)
+@topic--->in _form
+post_comment_path([@post, @comment])
+<%= button_to "Delete Comment", post_comment_path(comment.post, comment), method: :delete %>
+posts_path
+<%=  link_to "New post", new_post_path %>
+
+
+  <%= link_to "New Comment", new_topic_post_comment_path(@post.topic,@post) %> |
+  <%= link_to "Back to topic", topic_path(@post.topic) %> |
+  <%= link_to "Edit this post", edit_post_path(@post) %> |
+  <%= link_to "Back to posts", topic_posts_path(@post.topic) %>
+gem 'pagination', '~> 0.3.3'
+gem 'will_paginate', '~> 3.3', '>= 3.3.1'

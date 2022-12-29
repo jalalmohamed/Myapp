@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tags:</h1>
+
+<div>
+  <% @tags.each do |tag| %>
+    <%= link_to tag, style:"text-decoration:none" do %>
+      <span class="tag" ><%= tag.name %></span>
+    <% end %>
+  <% end %>
+</div>

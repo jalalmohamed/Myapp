@@ -3,7 +3,11 @@
 <%= render "form", post: @post %>
 
 <br>
-
 <div>
-  <%= link_to "Back to posts", topic_posts_path(@topic) %>
+  <%= link_to "Back to post", topic_posts_path(@topic) %>
 </div>
+<%# else %>
+<!--  <div>-->
+    <%#= link_to "Back to posts", posts_path %>
+<!--  </div>-->
+<%# end %>
