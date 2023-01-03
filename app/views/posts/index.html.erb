@@ -14,9 +14,10 @@
     <br><br><br>
   <% end %>
 </div>
+<%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
 <% if params[:topic_id] %>
   <%= link_to "Back to topic", topic_path(@topic) %> |
   <%= link_to "New post", new_topic_post_path %>
 <% else %>
-  <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+
 <% end %>

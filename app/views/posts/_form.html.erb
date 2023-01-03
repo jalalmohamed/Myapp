@@ -12,29 +12,29 @@
     </div>
   <% end %>
 
-  <div>
+  <div class='field'>
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
-
+<br>
   <div>
     <%= form.label :publish, style: "display: block" %>
     <%= form.date_field :publish %>
   </div>
-
-  <div>
-    <%= form.label :tag, style: "display: block" %>
-    <%= form.text_field :tags, value: post.tags.map(&:name).join(",")%>
-    <br><br>
-    <%= fields_for(@product_tag) do |p| %>
-      <%= p.label "All tags"%>
-      <%= collection_select(:tags,:id,@all_tags,:id,:name,{},{:multiple => true}) %>
-    <% end %>
-    <%#= render "add", product: @product %>
+<br>
+  <div class="field">
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image %>
   </div>
-  </div>
-
-  <div>
+<br>
+  <%= form.fields_for :tags,@post.tags.build do |field| %>
+    <%= field.label "New Tag" %>
+    <%= field.text_field :name %>
+  <% end %>
+      <%= form.label "All tags"%>
+      <%= form.collection_select :tag_ids,Tag.all,:id,:name,{},{:multiple => true} %>
+  </div><br>
+  <div class='field'>
     <%= form.submit %>
   </div>
 <% end %>

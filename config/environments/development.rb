@@ -7,10 +7,18 @@ Rails.application.configure do
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   # Do not eager load code on boot.
   config.eager_load = false
-
+  # Rails.application.config.hosts = [
+  #   IPAddr.new("0.0.0.0/0"),        # All IPv4 addresses.
+  #   IPAddr.new("::/0"),             # All IPv6 addresses.
+  #   "localhost",                    # The localhost reserved domain.
+  #   ENV["RAILS_DEVELOPMENT_HOSTS"]  # Additional comma-separated hosts for development.
+  # ]
+  # Rails.application.config.hosts << /[a-z0-9-]+\.ngrok\.io/
+  # Rails.application.config.hosts << ".ngrok.io"
+  config.hosts << "9aa2-2405-201-e03a-4037-c59c-85f1-9574-d9b9.in.ngrok.io"
   # Show full error reports.
   config.consider_all_requests_local = true
 

@@ -12,7 +12,15 @@ class TagsController < ApplicationController
     @tag=Tag.new
   end
   def create
-    @tag=@post.tags.create(tags_params)
+    @post.posttags.destroy_all
+    # params[:tag][:id].each do |tag|
+    #   if !tag.empty?
+    #     @post.posttags.build(:tag_id=>tag)
+    #     #@post.tags << Tag.find_or_create_by(name: tag)
+    #   end
+    # end
+    @post.posttags.build(:tag_id=>@tag)
+    @tag=@post.tags.build(tag_params)
     if @tag.save
       redirect_to topic_post_path(@topic,@post), notice: "Tag was successfully created"
     else
@@ -22,7 +30,8 @@ class TagsController < ApplicationController
   def edit
   end
   def update
-    if @tag.update(tags_params)
+
+    if @tag.update(tag_params)
       redirect_to topic_post_path(@topic,@post), notice: "Tag was successfully updated"
     else
       render :edit, status: :unprocessable_entity
@@ -35,10 +44,10 @@ class TagsController < ApplicationController
 
   private
   def set_topic
-    @topic=topic.find(params[:topic_id])
+    @topic=Topic.find(params[:topic_id])
   end
   def set_post
-    @post=post.find(params[:post_id])
+    @post=Post.find(params[:post_id])
   end
   def set_tag
     if params[:post_id]
@@ -47,7 +56,7 @@ class TagsController < ApplicationController
       @tag=Tag.find(params[:id])
     end
   end
-  def tags_params
-    params.require(:tag).permit(:name)
+  def tag_params
+    params.require(:tag).permit(:name, :topic_id, :post_id, :tag_id)
   end
 end
