@@ -8,9 +8,9 @@
     <strong>Publish:</strong>
     <%= post.publish %>
   </p>
-<%# if post&.image==true %>
+<% if @post.image.attached? %>
   <div style="width:400px;height:400px">
     <%= image_tag(post.image,style:"width:100%") %>
   </div>
-<%# end %>
+<% end %>
 </div>

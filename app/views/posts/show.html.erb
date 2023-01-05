@@ -30,15 +30,21 @@
 </td></tr></tbody></table>
 <% @post.ratings.each do |r| %>
   <p>
-    <strong>Rating:</strong>
-    <%= r.num %>
+<!--    <strong>Rating:</strong>-->
+    <%#= r.num %>
   </p>
 <% end %>
-
+<strong>Rating:</strong><br><br>
+<% (1..5).each do |t| %>
+  <%= t %> Star
+  <% y=@post.ratings.group(:num).where(num: t).count %>
+  <%= y if y!={} %>
+  <%= " =0" if y=={} %><br>
+<% end %>
 <br>
 <div class="field">
 <%= form_with model: [@topic,@post,@post.ratings.build] do |f| %>
-    <strong>Rating:</strong>
+    <strong>Give Rating to the Post:</strong>
       <%= f.radio_button :num, 1 %>1
       <%= f.radio_button :num, 2 %>2
       <%= f.radio_button :num, 3 %>3
@@ -53,7 +59,7 @@
   <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post) %> |
   <%= link_to "New tag", new_topic_post_tag_path(@topic,@post) %> |
   <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]) %> |
-  <%= link_to "Back to posts", topic_posts_path(@topic) %>
+  <%= link_to "Back to post", topic_posts_path(@topic) %>
 <br><br>
   <%= button_to "Destroy this post", topic_post_path(@topic, @post), method: :delete %>
 </div>
