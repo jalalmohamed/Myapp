@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_post
   before_action :set_comment, only: %i[ show edit update destroy ]
-  before_action :set_topic, only: %i[ index new create ]
+  before_action :set_topic, only: %i[ index new create edit update destroy]
   def index
     @comments=@topic.comments
   end
-
   def show
   end#@comment = @post.topic.comments.build @topic.comments.build
   def new
@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
   end
   def create
       @comment = @post.comments.build(comment_params)
+      @comment.user_id=current_user.id
       if @comment.save
           redirect_to topic_post_path(@topic,@post), notice: "comment was successfully created."
       else
@@ -23,7 +24,7 @@ class CommentsController < ApplicationController
   end
   def update
     if @comment.update(comment_params)
-      redirect_to post_path(@post), notice: "Comment was successfully updated."
+      redirect_to topic_post_path(@topic,@post), notice: "Comment was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

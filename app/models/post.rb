@@ -6,4 +6,9 @@ class Post < ApplicationRecord
   has_many :ratings, dependent: :destroy
   accepts_nested_attributes_for :tags, reject_if: :all_blank
   has_one_attached :image
+  belongs_to :user
+  has_and_belongs_to_many :users
+  # def Read_status_entry(user)
+  #   self.(user.posts).where(post_id: id,user_id: user.id).first_or_create
+  # end
 end

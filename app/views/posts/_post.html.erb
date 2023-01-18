@@ -1,16 +1,17 @@
 <div id="<%= dom_id post %>">
-  <p>
-    <strong>Name:</strong>
-    <%= post.name %>
-  </p>
-
-  <p>
-    <strong>Publish:</strong>
-    <%= post.publish %>
-  </p>
-<% if @post.image.attached? %>
-  <div style="width:400px;height:400px">
-    <%= image_tag(post.image,style:"width:100%") %>
+  <div class="card" style="width: 25rem;">
+    <% if @post.image.attached? %>
+      <div class="card-img-top"><%= image_tag(post.image,style:"width:400px;height:400px")%></div>
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= post.name %></h5>
+      <%= post.publish %>
+      <%= post.user.email %>
+      <p class="card-text"></p>
+      <% if can? :destroy, @post %>
+        <%= button_to "Destroy this post", topic_post_path(@topic, @post), method: :delete, class: "btn btn-danger" %>
+      <% end %>
+    </div>
   </div>
-<% end %>
+
 </div>

@@ -4,7 +4,7 @@
 
 <div>
   <% @tags.each do |tag| %>
-    <%= link_to tag, style:"text-decoration:none" do %>
+    <%= link_to tag, style:"text-decoration:none" , class: "btn btn-primary" do %>
       <span class="tag" ><%= tag.name %></span>
     <% end %>
   <% end %>

@@ -8,6 +8,8 @@ gem "image_processing", ">= 1.2"
 gem 'devise'
 gem "aws-sdk-s3", require: false
 gem "azure-storage-blob", require: false
+gem 'cancancan'
+gem 'jquery-rails'
 # gem "google-cloud-storage", "~> 1.11", require: false
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
@@ -29,7 +31,7 @@ gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-
+gem 'turbolinks_render'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
@@ -80,3 +82,7 @@ group :test do
   gem 'rails-controller-testing'
   gem "rubocop"
 end
+
+gem "cssbundling-rails", "~> 1.1"
+
+gem "jsbundling-rails", "~> 1.1"

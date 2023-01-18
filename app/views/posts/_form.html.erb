@@ -1,5 +1,5 @@
-
-<%= form_with(model: [@topic, post]) do |form| %>
+<h2>New Post</h2>
+<%= form_with(model: [@topic, post], remote: true) do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -11,30 +11,30 @@
       </ul>
     </div>
   <% end %>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Name</label>
+  <%= form.text_field :name, class: "form-control post_name" %>
+</div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Publish</label>
+    <%= form.date_field :publish, class: "form-control post_date"  %>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Image</label>
+    <%= form.file_field :image ,class: "form-control",type: "file", id: "formFile"%>
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">New Tag</label>
+    <%= form.fields_for :tags,@post.tags.build do |field| %>
+      <%= field.text_field :name, class: "form-control tag_name"  %>
+    <% end %>
+  </div>
 
-  <div class='field'>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-<br>
-  <div>
-    <%= form.label :publish, style: "display: block" %>
-    <%= form.date_field :publish %>
-  </div>
-<br>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">All Tags</label>
+  <%= form.collection_select :tag_ids,Tag.all,:id,:name,{},{:multiple => true, class: "form-control tag_name"} %>
+</div>
   <div class="field">
-    <%= form.label :image, style: "display: block" %>
-    <%= form.file_field :image %>
-  </div>
-<br>
-  <%= form.fields_for :tags,@post.tags.build do |field| %>
-    <%= field.label "New Tag" %>
-    <%= field.text_field :name %>
-  <% end %>
-      <%= form.label "All tags"%>
-      <%= form.collection_select :tag_ids,Tag.all,:id,:name,{},{:multiple => true} %>
+    <%= form.submit "Create", class: "btn btn-success"%>
   </div><br>
-  <div class='field'>
-    <%= form.submit %>
-  </div>
 <% end %>

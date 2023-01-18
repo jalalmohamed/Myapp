@@ -1,5 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
+<!--<p style="color: green"><%#= notice %></p>-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <%= render @post %>
 
 <h1>Comments</h1>
@@ -11,7 +14,7 @@
 <% if @post.tags.length>0 %>
   <strong>Tags:</strong>
   <% @post.tags.each do |tag| %>
-    <%= link_to tag, style:"text-decoration:none" do %>
+    <%= link_to tag, style:"text-decoration:none" , class: "btn btn-primary" do %>
       <span class="tag"><%= tag.name %></span>
     <% end %>
   <% end %>
@@ -24,7 +27,7 @@
       <%= field.text_field :name %>
     <% end %>
     <%= f.label "Tags" %>
-    <%= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true}  %>
+    <%= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true}%>
     <%= f.submit "Add" %>
   <% end %>
 </td></tr></tbody></table>
@@ -38,8 +41,12 @@
 <% (1..5).each do |t| %>
   <%= t %> Star
   <% y=@post.ratings.group(:num).where(num: t).count %>
-  <%= y if y!={} %>
-  <%= " =0" if y=={} %><br>
+  <% y=y.delete(t) %>=
+  <% if y.is_a? Numeric  %>
+    <%= y %>
+  <% else %>
+    <%= "0" %>
+  <% end %><br>
 <% end %>
 <br>
 <div class="field">
@@ -56,12 +63,13 @@
 <br>
 <% if params[:topic_id]%>
 <div>
-  <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post) %> |
-  <%= link_to "New tag", new_topic_post_tag_path(@topic,@post) %> |
-  <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]) %> |
-  <%= link_to "Back to post", topic_posts_path(@topic) %>
+  <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post) %>
+  <% if can? :update, @post %>
+    | <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]) %> |
+  <% end %>
+
 <br><br>
-  <%= button_to "Destroy this post", topic_post_path(@topic, @post), method: :delete %>
+  <%= link_to "Back to post", topic_posts_path(@topic) %>
 </div>
 <% else %>
   <%= link_to "New Comment", new_topic_post_comment_path(@post.topic,@post) %> |

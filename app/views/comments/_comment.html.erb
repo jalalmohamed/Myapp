@@ -1,11 +1,13 @@
-<div id="<%= dom_id comment %>">
-  <p>
-    <strong>Commenter:</strong>
-    <%= comment.commenter %>
-
-    <strong>Body:</strong>
-    <%= comment.body %> |
-    <%= link_to "Edit Comment", edit_topic_post_comment_path(@topic,comment.post, comment) %> | <%= button_to "Delete Comment", post_comment_path(comment.post, comment), method: :delete %>
-  </p>
-
-</div>
+<div class="card w-75">
+  <div class="card-body">
+    <h5 class="card-title"><%= comment.commenter %></h5>
+    <p class="card-text"><%= comment.body %></p>
+    <p><%= comment.user.email %></p>
+    <% if can? :update, comment %>
+      <table><tr>
+        <td><%= link_to "Edit Comment", edit_topic_post_comment_path(@topic,comment.post, comment), class: "btn btn-info"%></td>
+        <td><%= button_to "Delete Comment", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger" %></td>
+      </tr></table>
+    <% end %>
+  </div>
+</div><br>

@@ -1,23 +1,56 @@
-<p style="color: green"><%= notice %></p>
+<!--<p style="color: green"><%#= notice %></p>-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js">
+    $(document).ready(function(){
+        $("td").click(function(){
+            $("#show").each(function(index){
+                var value = "Read";
+                $('#read_text').text(value);
+                // $("#read_text").replaceWith("Read")
+            });});
+    });
+</script>
 
 <h1>Posts</h1>
-
+<table class="table table-dark table-striped table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Comments</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @posts.each do |post| %>
+    <tr>
+        <td><%= post.name %>&nbsp</td>
+        <% if params[:topic_id] %>
+          <% if post.users.where("user_id = ? AND post_id = ?",current_user.id,post.id).blank? %>
+            <td><p class="read_text">Unread</p></td>
+          <%end %>
+        <% else %>
+          <%= link_to "Show this post", post , class:"btn btn-info"%>
+          <% end %>&ensp;
+        <% if params[:topic_id] %>
+          <td>Average: <%= post.ratings.average(:num).round(2) %> stars.&ensp;</td>
+          <td><%= post.comments.count(:commenter) %> comments</td>
+        <% end %>
+        <td><%= link_to "Show this post", topic_post_path(@topic, post), remote: true, class:"btn btn-info", id: "show" %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
 <div id="posts">
-  <% @posts.each do |post| %>
-    <strong>Name:</strong>
-    <%= post.name %>&nbsp;
-      <% if params[:topic_id] %>
-        <%= link_to "Show this post", topic_post_path(@topic, post) %>
-      <% else %>
-        <%= link_to "Show this post", post %>
-      <% end %>
-    <br><br><br>
-  <% end %>
+  <%= render 'form', post: @post %>
 </div>
 <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
 <% if params[:topic_id] %>
-  <%= link_to "Back to topic", topic_path(@topic) %> |
-  <%= link_to "New post", new_topic_post_path %>
+  <%= link_to "Back to topic", topic_path(@topic), class: "btn btn-secondary" %>
+  <%= link_to "New post", new_topic_post_path(@topic), class: "btn btn-success" %>
 <% else %>
 
-<% end %>
+<% end %><p></p>

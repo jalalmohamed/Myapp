@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
+  protect_from_forgery except: [:index ,:show, :create, :new]
   before_action :authenticate_user!
   before_action :set_topic
   before_action :set_post, only: %i[ show edit update destroy ]
@@ -6,7 +8,10 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     if params[:topic_id]
+
       @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
+      @post = @topic.posts.new
+      @post.user_id=current_user.id
     else
       # @posts = Post.all
       @posts = Post.paginate(page: params[:page], per_page: 6)
@@ -14,30 +19,35 @@ class PostsController < ApplicationController
   end
   # GET /posts/1 or /posts/1.json
   def show
-
+    flash[:alert] = "Sorry you are not authorized!"
+    # authorize! :read, @post
+    # @read_status=Posts_Users.where(post_id: @post.id, user_id: current_user.id).last
+    @post = @topic.posts.find(params[:id])
+    # respond_to do |format|
+    #  format.js   { render :layout => false }
+    # end
   end
 
   # GET /posts/new
   def new
      @post = @topic.posts.build
-
   end
   # GET /posts/1/edit
   def edit
-
   end
-
   # POST /posts or /posts.json
   def create
-    @post = @topic.posts.build(post_params.except(:tags))
+    @post = @topic.posts.build(post_params)
+    @post.user_id=current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to topic_post_path(@topic, @post), notice: "Post was successfully created." }
-          #format.html { redirect_to post_path(@post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
