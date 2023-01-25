@@ -8,19 +8,15 @@
 // import * as ActiveStorage from "@rails/activestorage"
 import * as Popper from "@popperjs/core"
 import "channels"
-//= require jquery3
+//= require jquery
+//= require popper
+//= require turbolinks
+//= require bootstrap
+//= require_tree .
 //= require jquery_ujs
-//= require_tree
 // Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
-
-// $(document).ready(function(){
-//     $(".btn1").click(function(){
-//         //$(".read_text").hide();
-//         $(this).parent().find(".read_text").css( "display", "none" );
-//     })
-// });
 $(document).ready(function() {
     var $label = $("#read_text label");
     var text = $label.text();

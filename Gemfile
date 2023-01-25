@@ -10,6 +10,10 @@ gem "aws-sdk-s3", require: false
 gem "azure-storage-blob", require: false
 gem 'cancancan'
 gem 'jquery-rails'
+gem 'bootstrap'
+gem 'jquery-ui-rails'
+gem 'popper_js', '~> 2.11', '>= 2.11.6'
+gem 'turbolinks'
 # gem "google-cloud-storage", "~> 1.11", require: false
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
@@ -34,9 +38,9 @@ gem "stimulus-rails"
 gem 'turbolinks_render'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-
+gem 'webpacker'
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -65,7 +69,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
+  gem "bullet"
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

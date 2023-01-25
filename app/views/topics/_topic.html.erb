@@ -8,5 +8,8 @@
     <strong>Content:</strong>
     <%= topic.content %>
   </p>
-
+  <p>
+    <%= link_to "Show this topic", topic %> |
+    <%= link_to "Show this post", topic_posts_path(topic) %>
+  </p>
 </div>

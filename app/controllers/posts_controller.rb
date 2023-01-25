@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     if params[:topic_id]
-
       @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
       @post = @topic.posts.new
       @post.user_id=current_user.id
@@ -19,18 +18,22 @@ class PostsController < ApplicationController
   end
   # GET /posts/1 or /posts/1.json
   def show
-    flash[:alert] = "Sorry you are not authorized!"
+    # flash[:alert] = "Sorry you are not authorized!"
     # authorize! :read, @post
     # @read_status=Posts_Users.where(post_id: @post.id, user_id: current_user.id).last
     @post = @topic.posts.find(params[:id])
-    # respond_to do |format|
-    #  format.js   { render :layout => false }
-    # end
+    respond_to do |format|
+      format.js { render "render_show"}
+      format.html
+    end
   end
 
   # GET /posts/new
   def new
      @post = @topic.posts.build
+  end
+  def read
+    current_user.user_posts << @post
   end
   # GET /posts/1/edit
   def edit
@@ -41,9 +44,10 @@ class PostsController < ApplicationController
     @post.user_id=current_user.id
     respond_to do |format|
       if @post.save
+        format.js
         format.html { redirect_to topic_post_path(@topic, @post), notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
-        format.js
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }

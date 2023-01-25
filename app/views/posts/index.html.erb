@@ -4,12 +4,21 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js">
     $(document).ready(function(){
-        $("td").click(function(){
-            $("#show").each(function(index){
-                var value = "Read";
-                $('#read_text').text(value);
-                // $("#read_text").replaceWith("Read")
-            });});
+        $("#show").click(function(){
+            window.alert("clicked internal btn!");
+            $.ajax({
+                url: "topics/"+ <%=@topic%> +"/posts/"+ <%=@post%>,
+                type: "GET",
+                data: "Read",
+                success: function(data) {window.alert("success!!");},
+                error: function(data) {window.alert("something went wrong!!");}
+            });
+            // $("#show").each(function(index){
+            //     var value = "Read";
+            //     $('#read_text').text(value);
+            //     // $("#read_text").replaceWith("Read")
+            // });
+        });
     });
 </script>
 
@@ -22,6 +31,7 @@
       <th scope="col">Rating</th>
       <th scope="col">Comments</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -33,13 +43,16 @@
             <td><p class="read_text">Unread</p></td>
           <%end %>
         <% else %>
-          <%= link_to "Show this post", post , class:"btn btn-info"%>
+          <%= link_to "Show this post", post , class:"btn btn-info", id: "show"%>
           <% end %>&ensp;
         <% if params[:topic_id] %>
-          <td>Average: <%= post.ratings.average(:num).round(2) %> stars.&ensp;</td>
+          <td>Average: <%= (post.ratings.average(:num) || 0.0).floor(1) %> stars.&ensp;</td>
           <td><%= post.comments.count(:commenter) %> comments</td>
         <% end %>
-        <td><%= link_to "Show this post", topic_post_path(@topic, post), remote: true, class:"btn btn-info", id: "show" %></td>
+        <td><%= link_to "Show", topic_post_path(@topic, post), remote: true, class:"btn btn-info", id: "show" %></td>
+        <td><% if can? :destroy, post %>
+            <%= link_to "Destroy", topic_post_path(@topic,post), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <% end %></td>
     </tr>
     <% end %>
     </tbody>
@@ -54,3 +67,9 @@
 <% else %>
 
 <% end %><p></p>
+<%= link_to 'Add post', new_topic_post_path(@topic),  { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'}  %>
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

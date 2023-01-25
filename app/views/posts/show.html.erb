@@ -3,6 +3,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <%= render @post %>
 
 <h1>Comments</h1>
@@ -63,19 +64,20 @@
 <br>
 <% if params[:topic_id]%>
 <div>
-  <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post) %>
+  <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post), class: "btn btn-success"  %>
   <% if can? :update, @post %>
-    | <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]) %> |
+     <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]), class: "btn btn-warning"  %>
   <% end %>
 
 <br><br>
-  <%= link_to "Back to post", topic_posts_path(@topic) %>
+  <%= link_to "Back to post", topic_posts_path(@topic), class: "btn btn-secondary"  %>
 </div>
 <% else %>
-  <%= link_to "New Comment", new_topic_post_comment_path(@post.topic,@post) %> |
+  <%= link_to "New Comment", new_topic_post_comment_path(@post.topic,@post), class: "btn btn-success" %> |
   <%= link_to "Back to topic", topic_path(@post.topic) %> |
   <%= link_to "Edit this post", edit_post_path(@post) %> |
   <%= link_to "Back to posts", topic_posts_path(@post.topic) %>
 
   <%= button_to "Destroy this post", @post, method: :delete %>
 <% end %>
+<p></p>
