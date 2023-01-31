@@ -34,7 +34,8 @@
   <%= link_to "Back to topic", topic_path(@topic), class: "btn btn-secondary" %>
   <%= link_to "New post", new_topic_post_path(@topic), remote: true, class: "btn btn-success" %>
 <% end %>
-<p id = "new_form"></p>
+<br><br>
+<div id="new_form"></div>
 <br><br>
 <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
 <p></p>

@@ -1,6 +1,6 @@
 <% if @post.errors.any? %>
-  document.getElementById('new_form').innerHTML=("<%= escape_javascript(render partial: 'posts/form', locals: {post: @post}) %>");
+  document.getElementById('new_form').innerHTML=("<%= escape_javascript(render partial: 'posts/form', locals:  { post: @post}) %>");
 <% else %>
   document.getElementById('new_form').innerHTML="";
-  document.getElementById('table-body').innerHTML +=("<%= escape_javascript(render partial: 'posts/form', locals: {post: @post}) %>");
+  document.getElementById('table-body').innerHTML +=("<%= escape_javascript(render partial: 'posts/post', locals:  { post: @post}) %>");
 <% end %>

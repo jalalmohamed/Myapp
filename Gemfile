@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'bootstrap'
 gem 'jquery-ui-rails'
 gem 'bootstrap-multiselect_rails'
+gem 'turbolinks'
 # gem "google-cloud-storage", "~> 1.11", require: false
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
@@ -49,7 +50,7 @@ gem "tzinfo-data"
 gem "bootsnap", require: false
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+# gem "sass-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -81,7 +82,7 @@ group :test do
   gem "rubocop"
   gem "bullet"
 end
-
+gem 'wdm'
 gem "cssbundling-rails", "~> 1.1"
 
 gem "jsbundling-rails", "~> 1.1"

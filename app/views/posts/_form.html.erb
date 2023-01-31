@@ -13,11 +13,11 @@
   <% end %>
   <div class="mb-3">
     <%= form.label :name %>
-    <div class="col-sm-5"><%= form.text_field :name, class: "form-control post_name" %></div>
+    <div class="col-sm-5"><%= form.text_field :name, class: "form-control" %></div>
   </div>
   <div class="mb-3">
     <%= form.label :publish %>
-    <div class="col-sm-5"><%= form.date_field :publish, class: "form-control post_date"  %></div>
+    <div class="col-sm-5"><%= form.date_field :publish, class: "form-control"  %></div>
   </div>
   <div class="mb-3">
     <%= form.label :image %>
@@ -26,7 +26,7 @@
   <div class="mb-3">
     <%= form.label :tag_name %>
     <div class="col-sm-5"><%= form.fields_for :tags,@post.tags.build do |field| %>
-      <%= field.text_field :name, class: "form-control tag_name"  %>
+      <%= field.text_field :name, class: "form-control"  %>
       <% end %></div>
   </div>
 
