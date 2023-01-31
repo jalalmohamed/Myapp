@@ -4,11 +4,11 @@
 
 <div id="topics">
   <% @topics.each do |topic| %>
-    <%= render topic %></div>
+    <%= render topic %>
   <% end %>
-  <div class="container">
-  <%= link_to "New topic", new_topic_path %>
-  </div>
+
+  <%= link_to "New topic", new_topic_path , class: "btn btn-success"%>
+
 </div>
 
 

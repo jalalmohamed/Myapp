@@ -1,16 +1,16 @@
 
   <%= form_with(model: [@topic,@post, comment]) do |form| %>
-    <div>
-      <%= form.label :commenter, style: "display: block" %>
-      <%= form.text_field :commenter %>
+    <div class="mb-3">
+      <%= form.label :commenter, style: "display: block" , class: "form-label" %>
+      <div class="col-sm-5"><%= form.text_field :commenter, class: "form-control" %></div>
     </div>
 
-    <div>
-      <%= form.label :Body, style: "display: block" %>
-      <%= form.text_area :body %>
+    <div class="mb-3">
+      <%= form.label :Body, style: "display: block" , class: "form-label" %>
+      <div class="col-sm-5"><%= form.text_area :body , class: "form-control"%></div>
     </div>
 
-    <div>
-      <%= form.submit %>
+    <div class="actions">
+      <%= form.submit class: "btn btn-success" %>
     </div>
   <% end %>

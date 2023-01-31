@@ -6,7 +6,7 @@
     <% if can? :update, comment %>
       <table><tr>
         <td><%= link_to "Edit Comment", edit_topic_post_comment_path(@topic,comment.post, comment), class: "btn btn-info"%></td>
-        <td><%= button_to "Delete Comment", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger" %></td>
+        <td><%= button_to "Delete Comment", topic_post_comment_path(@topic,@post,comment), method: :delete, class: "btn btn-danger" %></td>
       </tr></table>
     <% end %>
   </div>

@@ -5,7 +5,7 @@
 <br>
 <% if params[:topic_id] %>
 <div>
-  <%= link_to "Back", topic_post_path([@topic, @post]) %>
+  <%= link_to "Back", topic_post_path([@topic, @post]) , class: "btn btn-secondary" %>
 </div>
 <% else %>
   <div>
@@ -13,3 +13,4 @@
     <%= link_to "Back to posts", posts_path %>
   </div>
 <% end %>
+<p></p>

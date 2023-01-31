@@ -1,15 +1,14 @@
 <div id="<%= dom_id topic %>">
-  <p>
-    <strong>Title:</strong>
-    <%= topic.title %>
-  </p>
+  <div class="card">
+    <div class="card-body">
 
-  <p>
-    <strong>Content:</strong>
-    <%= topic.content %>
-  </p>
-  <p>
-    <%= link_to "Show this topic", topic %> |
-    <%= link_to "Show this post", topic_posts_path(topic) %>
-  </p>
+      <h5 class="card-title"><%= topic.title %></h5>
+
+      <p class="card-text"><%= topic.content %></p>
+
+    <%= link_to "Show this topic", topic, class: "btn btn-secondary" %>
+    <%= link_to "Show this post", topic_posts_path(topic), class: "btn btn-primary" %>
+
+    </div>
+  </div><br>
 </div>

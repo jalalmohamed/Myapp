@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
   end
   def destroy
     @comment.destroy
-    redirect_to post_path(@post), notice: "Comment was successfully deleted."
+    redirect_to topic_post_path(@topic,@post), notice: "Comment was successfully deleted."
   end
   private
   def set_topic

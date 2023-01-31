@@ -8,11 +8,11 @@ class Post < ApplicationRecord
   has_one_attached :image, dependent: :destroy
   belongs_to :user
   has_and_belongs_to_many :users
-  # def Read_status_entry(user)
-  #   self.(user.posts).where(post_id: id,user_id: user.id).first_or_create
-  # end
+
+  scope :date_between,->(start_date,end_date) { where(created_at: start_date..end_date)}
   #validations
   validates :name, presence: true
   validates :name, length: { maximum: 20}
   validates :name, uniqueness: {message: "already exists"}
+
 end

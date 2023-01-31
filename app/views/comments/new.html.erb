@@ -1,7 +1,7 @@
 <h1>New Comment</h1>
 
 <%= render "form", comment: @comment %>
-
+<br>
 <div>
-  <%= link_to "Back to posts", topic_post_path(@topic,@post) %>
+  <%= link_to "Back to posts", topic_post_path(@topic,@post), class: "btn btn-secondary" %>
 </div>

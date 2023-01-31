@@ -1,0 +1,9 @@
+<%= form_with url: posts_url, method: :get do |form| %>
+  <div class="row g-3 align-items-center">
+    <div class="col-auto"><%= form.label :From %></div>
+    <div class="col-auto"><%= form.date_field :start_date, value: params[:start_date],class: "form-control" %></div>
+    <div class="col-auto"><%= form.label :to %></div>
+    <div class="col-auto"><%= form.date_field :end_date, value: params[:end_date], class: "form-control" %></div>
+    <div class="col-auto"><%= form.submit "Show details", class: "btn btn-success" %></div>
+  </div>
+<% end %>

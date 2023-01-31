@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_07_075512) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_31_101827) do
   create_table "Posts_Users", id: false, force: :cascade do |t|
     t.integer "Post_id", null: false
     t.integer "User_id", null: false
@@ -106,6 +106,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_07_075512) do
     t.date "publish"
     t.integer "topic_id"
     t.integer "user_id"
+    t.integer "comments_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float "rating_average", default: 0.0
   end
 
   create_table "posttags", force: :cascade do |t|

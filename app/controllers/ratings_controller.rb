@@ -11,7 +11,7 @@ class RatingsController < ApplicationController
 
   def create
     @rating=@post.ratings.create(rating_params)
-    redirect_to topic_post_path(@topic,@post)
+    redirect_to topic_post_path(@topic,@post), notice: "Rating was successfully created."
   end
   def destroy
     @rating.destroy

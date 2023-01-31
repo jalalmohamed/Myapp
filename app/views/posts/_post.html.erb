@@ -1,17 +1,10 @@
-<div id="<%= dom_id post %>">
-  <div class="card" style="width: 25rem;">
-    <% if @post.image.attached? %>
-      <div class="card-img-top"><%= image_tag(post.image,style:"width:400px;height:400px")%></div>
-    <% end %>
-    <div class="card-body">
-      <h5 class="card-title"><%= post.name %></h5>
-      <%= post.publish %>
-      <%= post.user.email %>
-      <p class="card-text"></p>
-      <% if can? :destroy, @post %>
-        <%= button_to "Destroy this post", topic_post_path(@topic, @post), method: :delete, class: "btn btn-danger" %>
-      <% end %>
-    </div>
-  </div>
-
-</div>
+<td><%= post.name %>&nbsp</td>
+<td><p class="read_text">Unread</p></td>
+<td><%= (post.rating_average || 0.0).floor(1) %> stars.&ensp;</td>
+<td><%= post.comments.size %> comments</td>
+<td><%= link_to "Show", topic_post_path(post.topic, post), class:"btn btn-info" %></td>
+<% if can? :destroy, post %>
+  <td><%= link_to "Destroy", topic_post_path(post.topic,post), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+<% else %>
+  <td></td>
+<% end %>

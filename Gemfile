@@ -6,14 +6,11 @@ gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 gem 'will_paginate-bootstrap', '~>1.0.0'
 gem "image_processing", ">= 1.2"
 gem 'devise'
-gem "aws-sdk-s3", require: false
-gem "azure-storage-blob", require: false
 gem 'cancancan'
 gem 'jquery-rails'
 gem 'bootstrap'
 gem 'jquery-ui-rails'
-gem 'popper_js', '~> 2.11', '>= 2.11.6'
-gem 'turbolinks'
+gem 'bootstrap-multiselect_rails'
 # gem "google-cloud-storage", "~> 1.11", require: false
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
@@ -28,14 +25,11 @@ gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
-gem 'turbolinks_render'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 gem 'webpacker'
@@ -85,6 +79,7 @@ group :test do
   gem "ffi"
   gem 'rails-controller-testing'
   gem "rubocop"
+  gem "bullet"
 end
 
 gem "cssbundling-rails", "~> 1.1"

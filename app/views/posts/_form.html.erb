@@ -1,5 +1,5 @@
 <h2>New Post</h2>
-<%= form_with(model: [@topic, post], remote: true) do |form| %>
+<%= form_with(model: [@topic, post], data: {remote: true}) do |form| %>
   <% if post.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -11,41 +11,30 @@
       </ul>
     </div>
   <% end %>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Name</label>
-  <%= form.text_field :name, class: "form-control post_name" %>
-</div>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Publish</label>
-    <%= form.date_field :publish, class: "form-control post_date"  %>
+    <%= form.label :name %>
+    <div class="col-sm-5"><%= form.text_field :name, class: "form-control post_name" %></div>
   </div>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">Image</label>
-    <%= form.file_field :image ,class: "form-control",type: "file", id: "formFile"%>
+    <%= form.label :publish %>
+    <div class="col-sm-5"><%= form.date_field :publish, class: "form-control post_date"  %></div>
   </div>
   <div class="mb-3">
-    <label for="exampleFormControlInput1" class="form-label">New Tag</label>
-    <%= form.fields_for :tags,@post.tags.build do |field| %>
+    <%= form.label :image %>
+    <div class="col-sm-5"><%= form.file_field :image ,class: "form-control",type: "file", id: "formFile"%></div>
+  </div>
+  <div class="mb-3">
+    <%= form.label :tag_name %>
+    <div class="col-sm-5"><%= form.fields_for :tags,@post.tags.build do |field| %>
       <%= field.text_field :name, class: "form-control tag_name"  %>
-    <% end %>
+      <% end %></div>
   </div>
 
-<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">All Tags</label>
-  <%= form.collection_select :tag_ids,Tag.all,:id,:name,{},{:multiple => true, class: "form-control tag_name"} %>
-</div>
-  <div class="field">
+  <div class="mb-3">
+    <%= form.label :All_tags %>
+    <div class="col-sm-5"><%= form.collection_select :tag_ids,Tag.all,:id,:name,{},{:multiple => true, class: "form-control tag_name"} %></div>
+  </div>
+  <div class="actions">
     <%= form.submit class: "btn btn-success"%>
   </div><br>
 <% end %>
-<div class="d-flex justify-content-center">
-  <div class="spinner-border text-primary spinner div-spinner" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-<script id="spinner-script">
-  $(document).ajaxStart(function(){
-      $(".div-spinner").show();
-  });
-  $(".div-spinner").hide();
-</script>

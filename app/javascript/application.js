@@ -1,10 +1,9 @@
 // Entry point for the build script in your package.json
 //= require jquery
-//= require popper
-//= require turbolinks
-//= require bootstrap
 //= require_tree .
 //= require jquery_ujs
+//= require bootstrap
+//= require bootstrap-multiselect
 import "./controllers";
 import "./controllers"
 import Rails from 'rails-ujs'

@@ -9,16 +9,10 @@
 import * as Popper from "@popperjs/core"
 import "channels"
 //= require jquery
-//= require popper
-//= require turbolinks
 //= require bootstrap
 //= require_tree .
 //= require jquery_ujs
+//= require active_storage
 // Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
-$(document).ready(function() {
-    var $label = $("#read_text label");
-    var text = $label.text();
-    $label.text(text.replace("Unread", "read"));
-});

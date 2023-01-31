@@ -3,8 +3,7 @@
 <%= render @topic %>
 
 <div>
-  <%= link_to "Edit this topic", edit_topic_path(@topic) %> |
-  <%= link_to "Back to topics", topics_path %>
-
-  <%= button_to "Destroy this topic", @topic, method: :delete %>
+  <%= link_to "Back to topics", topics_path, class: "btn btn-secondary" %>
+  <%= link_to "Edit this topic", edit_topic_path(@topic) , class: "btn btn-warning"%>
+  <%= link_to "Destroy this topic", topic_path(@topic), method: :delete, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-danger"%>
 </div>

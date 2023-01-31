@@ -1,17 +1,25 @@
-<!--<p style="color: green"><%#= notice %></p>-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-
-<%= render @post %>
-
-<h1>Comments</h1>
+<div class="card" style="width: 25rem;">
+  <% if @post.image.attached? %>
+    <div class="card-img-top"><%= image_tag(@post.image,style:"width:400px;height:400px")%></div>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @post.name %></h5>
+    <%= @post.publish %>
+    <%= @post.user.email %>
+    <p class="card-text"></p>
+    <% if can? :destroy, @post %>
+      <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]), class: "btn btn-warning"  %>
+      <%= link_to "Destroy", topic_post_path(@topic,@post), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+</div>
+<br>
+<h3>Comments</h3>
 
 <% @post.comments.each do |comment| %>
 <%= render comment %>
 <% end %>
-<table><tbody><tr><td>
+
 <% if @post.tags.length>0 %>
   <strong>Tags:</strong>
   <% @post.tags.each do |tag| %>
@@ -19,29 +27,38 @@
       <span class="tag"><%= tag.name %></span>
     <% end %>
   <% end %>
-<% end %></td>
-<td>
-
+<% end %>
+<br><br>
+<table><tr>
   <%= form_with(model: [@topic, @post]) do |f| %>
-    <%= f.fields_for :tags,@post.tags.build do |field| %>
+    <td><%= f.fields_for :tags,@post.tags.build do |field| %>
       <%= field.label "New Tag" %>
-      <%= field.text_field :name %>
-    <% end %>
+    <div class="col-sm-10"><%= field.text_field :name, class: "form-control" %></div>
+    <% end %></td>
+    <td><div class="field">
     <%= f.label "Tags" %>
-    <%= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true}%>
-    <%= f.submit "Add" %>
+<!--    <div class="col-sm-5"><%#= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true, class: "form-control"}%></div><br>-->
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Select tags
+      </button>
+      <div class="dropdown-menu"><%= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true, class: 'dropdown-item', id: "dropdown"}%></div>
+    </div>
+    </div></td>
+    <td><br>&nbsp;&nbsp;<%= f.submit "Add", class: "btn btn-success" %></td>
   <% end %>
-</td></tr></tbody></table>
-<% @post.ratings.each do |r| %>
-  <p>
+</tr></table><br>
+
+<%# @post.ratings.each do |r| %>
+<!--  <p>-->
 <!--    <strong>Rating:</strong>-->
     <%#= r.num %>
-  </p>
-<% end %>
+<!--  </p>-->
+<%# end %>
 <strong>Rating:</strong><br><br>
 <% (1..5).each do |t| %>
   <%= t %> Star
-  <% y=@post.ratings.group(:num).where(num: t).count %>
+  <% y=@post.ratings.group(:num).where(num: t).size %>
   <% y=y.delete(t) %>=
   <% if y.is_a? Numeric  %>
     <%= y %>
@@ -65,9 +82,7 @@
 <% if params[:topic_id]%>
 <div>
   <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post), class: "btn btn-success"  %>
-  <% if can? :update, @post %>
-     <%= link_to "Edit this post", edit_topic_post_path([@topic, @post]), class: "btn btn-warning"  %>
-  <% end %>
+
 
 <br><br>
   <%= link_to "Back to post", topic_posts_path(@topic), class: "btn btn-secondary"  %>
