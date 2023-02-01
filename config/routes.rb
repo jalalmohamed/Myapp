@@ -7,15 +7,14 @@ Rails.application.routes.draw do
 #resources :posts
   resources :topics do
     resources :posts do
-      resources :comments
+      post 'read', on: :member
+      resources :comments, except: [:index, :show]
       resources :tags
       resources :ratings
     end
   end
   resources :tags
-  resources :posts do
-    resources :comments, only: [:show,:new, :edit, :update, :destroy]
-  end
+  get '/posts' => 'posts#index'
   #shallow: true means only: [:index, :new, :create]
   resources :insides
   resources :articles do

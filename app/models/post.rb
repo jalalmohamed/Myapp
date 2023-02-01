@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :tags, reject_if: :all_blank
   has_one_attached :image, dependent: :destroy
   belongs_to :user
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, join_table: 'posts_users_read_status'
 
   scope :date_between,->(start_date,end_date) { where(created_at: start_date..end_date)}
   #validations

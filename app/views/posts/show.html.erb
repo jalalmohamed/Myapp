@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <% unless @post.users.include?(current_user) %>
+    <%= javascript_pack_tag 'post', 'data-turbolinks-track': 'reload', defer: true %>
+  <% end %>
+<% end %>
+<div id="post" data-read-url="<%= read_topic_post_path(@topic, @post) %>">
 <div class="card" style="width: 25rem;">
   <% if @post.image.attached? %>
     <div class="card-img-top"><%= image_tag(@post.image,style:"width:400px;height:400px")%></div>
@@ -23,7 +29,7 @@
 <% if @post.tags.length>0 %>
   <strong>Tags:</strong>
   <% @post.tags.each do |tag| %>
-    <%= link_to tag, style:"text-decoration:none" , class: "btn btn-primary" do %>
+    <%= link_to tag_path, style:"text-decoration:none" , class: "btn btn-primary" do %>
       <span class="tag"><%= tag.name %></span>
     <% end %>
   <% end %>
@@ -35,26 +41,22 @@
       <%= field.label "New Tag" %>
     <div class="col-sm-10"><%= field.text_field :name, class: "form-control" %></div>
     <% end %></td>
-    <td><div class="field">
+    <td>
     <%= f.label "Tags" %>
 <!--    <div class="col-sm-5"><%#= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true, class: "form-control"}%></div><br>-->
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Select tags
       </button>
-      <div class="dropdown-menu"><%= f.collection_select :tag_ids,Tag.all,:id,:name,{},{multiple: true, class: 'dropdown-item', id: "dropdown"}%></div>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <%= f.collection_select(:tag_ids,Tag.all,:id,:name,{},{multiple: true, class: 'dropdown-item'}) %>
+      </div>
     </div>
-    </div></td>
+    </td>
     <td><br>&nbsp;&nbsp;<%= f.submit "Add", class: "btn btn-success" %></td>
   <% end %>
 </tr></table><br>
 
-<%# @post.ratings.each do |r| %>
-<!--  <p>-->
-<!--    <strong>Rating:</strong>-->
-    <%#= r.num %>
-<!--  </p>-->
-<%# end %>
 <strong>Rating:</strong><br><br>
 <% (1..5).each do |t| %>
   <%= t %> Star
@@ -82,9 +84,6 @@
 <% if params[:topic_id]%>
 <div>
   <%= link_to "New Comment", new_topic_post_comment_path(@topic,@post), class: "btn btn-success"  %>
-
-
-<br><br>
   <%= link_to "Back to post", topic_posts_path(@topic), class: "btn btn-secondary"  %>
 </div>
 <% else %>
@@ -96,3 +95,4 @@
   <%= button_to "Destroy this post", @post, method: :delete %>
 <% end %>
 <p></p>
+</div>

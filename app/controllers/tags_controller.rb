@@ -13,12 +13,6 @@ class TagsController < ApplicationController
   end
   def create
     @post.posttags.destroy_all
-    # params[:tag][:id].each do |tag|
-    #   if !tag.empty?
-    #     @post.posttags.build(:tag_id=>tag)
-    #     #@post.tags << Tag.find_or_create_by(name: tag)
-    #   end
-    # end
     @post.posttags.build(:tag_id=>@tag)
     @tag=@post.tags.build(tag_params)
     if @tag.save
@@ -30,7 +24,6 @@ class TagsController < ApplicationController
   def edit
   end
   def update
-
     if @tag.update(tag_params)
       redirect_to topic_post_path(@topic,@post), notice: "Tag was successfully updated"
     else

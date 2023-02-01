@@ -6,7 +6,7 @@
 <% @tag.posttags.each do |posttag| %>
   <h2>Post:</h2>
   <%= render 'posts/post', post: posttag.post %>
-  <%= link_to 'Read more', posttag.post, class: "btn btn-primary" %>
+  <%#= link_to 'Read more', posttag.post, class: "btn btn-primary" %>
   <hr/>
 
 <% end %>

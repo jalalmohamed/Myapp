@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_31_101827) do
-  create_table "Posts_Users", id: false, force: :cascade do |t|
-    t.integer "Post_id", null: false
-    t.integer "User_id", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_02_01_083258) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +105,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_31_101827) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float "rating_average", default: 0.0
+  end
+
+  create_table "posts_users_read_status", id: false, force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
+    t.index ["post_id", "user_id"], name: "index_posts_users_read_status_on_post_id_and_user_id"
+    t.index ["user_id", "post_id"], name: "index_posts_users_read_status_on_user_id_and_post_id"
   end
 
   create_table "posttags", force: :cascade do |t|
