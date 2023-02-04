@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   def index
     if params[:topic_id]
       @posts=@topic.posts.paginate(page: params[:page], per_page: 10).includes([:users])
-      @post = @topic.posts.build
+      # @post = @topic.posts.build
     else
       @start_date= params[:start_date]? Date.parse(params[:start_date]) : Date.yesterday
       @end_date= params[:end_date]? Date.parse(params[:end_date]) : Date.today

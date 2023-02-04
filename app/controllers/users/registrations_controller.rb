@@ -1,15 +1,6 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_permitted_parameters, only: %i[create update]
-
-  protected
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(
-      :sign_up, keys: %i[name address phone_number role_id]
-    )
-  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -24,9 +15,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
 
   # PUT /resource
   # def update

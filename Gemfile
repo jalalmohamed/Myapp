@@ -9,9 +9,12 @@ gem 'devise'
 gem 'cancancan'
 gem 'jquery-rails'
 gem 'bootstrap'
+gem 'popper_js'
 gem 'jquery-ui-rails'
 gem 'bootstrap-multiselect_rails'
 gem 'turbolinks'
+gem "letter_opener", :group => :development
+
 # gem "google-cloud-storage", "~> 1.11", require: false
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"
@@ -72,6 +75,10 @@ group :development do
   # gem "spring"
 end
 
+group :production do
+  gem 'pg'
+  # gem 'rails_12factor'
+end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
@@ -83,6 +90,6 @@ group :test do
   gem "bullet"
 end
 gem 'wdm'
-gem "cssbundling-rails", "~> 1.1"
+gem "cssbundling-rails"
 
-gem "jsbundling-rails", "~> 1.1"
+gem "jsbundling-rails"
