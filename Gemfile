@@ -87,7 +87,6 @@ group :test do
   gem "ffi"
   gem 'rails-controller-testing'
   gem "rubocop"
-  gem "bullet"
 end
 gem 'wdm'
 gem "cssbundling-rails"
