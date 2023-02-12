@@ -76,7 +76,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
   # gem 'rails_12factor'
 end
 group :test do
@@ -88,7 +87,7 @@ group :test do
   gem 'rails-controller-testing'
   gem "rubocop"
 end
-gem 'wdm'
+
 gem "cssbundling-rails"
 
 gem "jsbundling-rails"

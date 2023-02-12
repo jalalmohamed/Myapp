@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_01_083258) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_054140) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -99,12 +99,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_083258) do
   create_table "posts", force: :cascade do |t|
     t.string "name", limit: 255
     t.date "publish"
-    t.integer "topic_id"
     t.integer "user_id"
     t.integer "comments_count"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float "rating_average", default: 0.0
+    t.integer "topic_id"
+    t.index ["topic_id"], name: "index_posts_on_topic_id"
   end
 
   create_table "posts_users_read_status", id: false, force: :cascade do |t|
@@ -162,6 +163,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_01_083258) do
   add_foreign_key "comments", "posts"
   add_foreign_key "commits", "articles"
   add_foreign_key "insides", "articles"
+  add_foreign_key "posts", "topics"
   add_foreign_key "posttags", "posts"
   add_foreign_key "posttags", "tags"
   add_foreign_key "ratings", "posts"
